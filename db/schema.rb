@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120901143141) do
+ActiveRecord::Schema.define(:version => 20120922205252) do
 
   create_table "attachments", :force => true do |t|
     t.string   "attachment"
@@ -75,6 +75,13 @@ ActiveRecord::Schema.define(:version => 20120901143141) do
   end
 
   add_index "posts", ["topic_id"], :name => "index_posts_on_topic_id"
+
+  create_table "preferences", :force => true do |t|
+    t.boolean  "notify_on_mention"
+    t.boolean  "notify_on_message"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
 
   create_table "private_users", :force => true do |t|
     t.integer  "private_topic_id"
