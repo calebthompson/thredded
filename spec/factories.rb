@@ -129,7 +129,6 @@ FactoryGirl.define do
     superadmin         'f'
     time_zone          'Eastern Time (US & Canada)'
     password
-    preference
 
 
     factory :email_confirmed_user do
