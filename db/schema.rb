@@ -77,11 +77,17 @@ ActiveRecord::Schema.define(:version => 20120922205252) do
   add_index "posts", ["topic_id"], :name => "index_posts_on_topic_id"
 
   create_table "preferences", :force => true do |t|
-    t.boolean  "notify_on_mention"
-    t.boolean  "notify_on_message"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.boolean  "notify_on_mention",    :default => false, :null => false
+    t.boolean  "notify_on_message",    :default => false, :null => false
+    t.boolean  "notify_on_new_thread", :default => false, :null => false
+    t.boolean  "notify_on_new_post",   :default => false, :null => false
+    t.boolean  "send_daily_digest",    :default => false, :null => false
+    t.integer  "user_id",                                 :null => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
   end
+
+  add_index "preferences", ["user_id"], :name => "index_preferences_on_user_id", :unique => true
 
   create_table "private_users", :force => true do |t|
     t.integer  "private_topic_id"
@@ -136,6 +142,7 @@ ActiveRecord::Schema.define(:version => 20120922205252) do
     t.integer "category_id", :null => false
   end
 
+  add_index "topic_categories", ["category_id"], :name => "index_topic_categories_on_category_id"
   add_index "topic_categories", ["topic_id"], :name => "index_topic_categories_on_topic_id"
 
   create_table "topics", :force => true do |t|

@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   include ActiveModel::Dirty
 
+  has_one  :preference
   has_many :sites
   has_many :roles
   has_many :messageboards, through: :roles
@@ -10,11 +11,13 @@ class User < ActiveRecord::Base
   has_many :private_topics, through: :private_users
 
   accepts_nested_attributes_for :roles, allow_destroy: true
+  accepts_nested_attributes_for :preference
 
   after_save :update_posts
 
   attr_accessible :email, :name, :password, :password_confirmation,
-    :remember_me, :roles_attributes, :time_zone, :post_filter
+    :remember_me, :roles_attributes, :time_zone, :post_filter,
+    :preference_attributes
 
   default_scope include: :roles
 

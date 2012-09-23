@@ -1,5 +1,6 @@
 <% content_for :page_id do %>session_mgmt<% end %>
 <% content_for :page_title do %><%= site.title %> | Edit <%= resource_name.to_s.humanize %><% end %>
+<% resource.preference ||= Preference.new %>
 
 <h1>Edit <%= resource_name.to_s.humanize %></h1>
 
@@ -27,12 +28,28 @@
   <p><%= f.label :post_filter %> 
   <%= f.select :post_filter, Post::Filters, {}, :tabindex => 4 %></p>
 
+  <%= f.fields_for :preference do |p| %>
+    <p><%= p.label :notify_on_mention %>
+    <%= p.check_box :notify_on_mention %></p>
+
+    <p><%= p.label :notify_on_message %>
+    <%= p.check_box :notify_on_message %></p>
+
+    <p><%= p.label :notify_on_new_thread %>
+    <%= p.check_box :notify_on_new_thread %></p>
+
+    <p><%= p.label :notify_on_new_post %>
+    <%= p.check_box :notify_on_new_post %></p>
+
+    <p><%= p.label :send_daily_digest %>
+    <%= p.check_box :send_daily_digest %></p>
+  <% end %>
 
   <p><%= f.submit "Update" %></p>
 <% end %>
 
 <h2>Cancel my account</h2>
 
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p>
+<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => {:confirm => "Are you sure?"}, :method => :delete %>.</p>
 
 <%= link_to "Back", :back %>

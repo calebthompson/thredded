@@ -56,6 +56,9 @@ FactoryGirl.define do
   factory :preference do
     notify_on_mention false
     notify_on_message false
+    notify_on_new_thread false
+    notify_on_new_post false
+    send_daily_digest false
   end
 
   factory :private_topic do
@@ -126,6 +129,8 @@ FactoryGirl.define do
     superadmin         'f'
     time_zone          'Eastern Time (US & Canada)'
     password
+    preference
+
 
     factory :email_confirmed_user do
       email              { FactoryGirl.generate(:user_email) }

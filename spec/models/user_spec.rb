@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe User do
 
-  it { should have_many(:preferences) }
+  it { should have_one(:preference) }
   it { should have_many(:sites) }
   it { should eager_load(:roles) }
 
