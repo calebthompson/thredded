@@ -1,0 +1,86 @@
+.pseudo-backdrop { display: none; }
+.psuedo-container {
+  background: white;
+  border-bottom: solid 4px #888;
+  border-right: solid 4px #888;
+  float: right;
+  margin-left: 2%;
+  overflow: hidden;
+  width: 33%;
+
+  header {
+    ul {
+      background: #F9F9F9;
+      clear: both;
+      color: #999;
+      display: block;
+      font-size: 11px;
+      list-style: none;
+      margin: 0;
+      overflow: hidden;
+      padding: 10px;
+      white-space: nowrap;
+    }
+
+    li {
+      display: inline-block;
+    }
+
+    a {
+      @extend .btn;
+      @extend .btn-round;
+      @extend .btn-small;
+    }
+
+    .search {
+      float: right;
+
+      input {
+        @extend .input-search;
+      }
+    }
+  }
+
+  code {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -o-pre-wrap;
+  }
+
+  table {
+    margin: 15px;
+    font-size: .8em;
+
+    th {
+      background: #ececec;
+      text-align: left;
+      font-size: 12px;
+      padding: 4px;
+      border-top: solid 10px white;
+    }
+
+    tbody {
+      padding-top: 10px;
+    }
+
+    tr:first-child td {
+      padding-top: 14px;
+    }
+
+    tr:nth-child(odd) td {
+      background: #f8f8f8;
+    }
+
+    th, td {
+      width: 46%;
+      padding: 2%;
+      vertical-align: top;
+    }
+
+    h1 { font-size: 12px; margin-bottom: 5px; }
+    h2 { font-size: 11px; margin-bottom: 5px;  }
+    h5 { font-size: 9px; margin-bottom: 5px; }
+    p { margin-bottom: 10px; }
+    ul { margin-bottom: 10px; }
+  }
+}
