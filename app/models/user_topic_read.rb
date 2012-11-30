@@ -7,31 +7,6 @@ class UserTopicRead < ActiveRecord::Base
 
   attr_accessor :viewing_page, :viewing_topic
 
-  def self.find_or_create_by_user_and_topic(user, topic, page)
-    page = page.nil? ? 1 : page.to_i
-
-    if user
-      user_topic_read = find_by_user_id_and_topic_id(user.id, topic.id)
-
-      if user_topic_read.blank?
-        posts_count = [post_limit * (page - 1), topic.posts.size].min
-        last_post = topic.posts.each_slice(post_limit).to_a[page - 1].first
-
-        user_topic_read = create(
-          user_id: user.id,
-          topic_id: topic.id,
-          post_id: last_post.id,
-          posts_count: posts_count,
-          page: page
-        )
-      end
-
-      user_topic_read
-    else
-      NullTopicRead.new
-    end
-  end
-
   def self.statuses_for(user, topics)
     if user && topics
       topic_ids = topics.map { |topic| topic.id  }
