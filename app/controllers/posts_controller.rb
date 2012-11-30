@@ -10,7 +10,7 @@ class PostsController < ApplicationController
     authorize! :show, topic
     @post = Post.new(filter: current_user.try(:post_filter))
     @posts = Post.where(topic_id: topic).page(page)
-    @read_status = UserTopicRead.find_or_create_by_user_and_topic(current_user, topic, page)
+    @read_status = MarkTopicReadContext.call(current_user, topic, page)
 
     if not_inside_topic_and_in_an_old_page?
       redirect_to_later_page and return
@@ -20,7 +20,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    p = topic.posts.create(params[:post])
+    topic.posts.create(params[:post])
     redirect_to :back
   end
 
